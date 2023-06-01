@@ -1,0 +1,47 @@
+:root{
+    --text-color: #fff;
+    --main-color: #29fd53;
+    --link-color: #000;
+    --hover-color: #b00;
+    --size: 99vmin;
+    --ratio: 1 / 1.1;
+}
+
+body{
+    margin: 0;
+    padding: 0;
+    overflow: hidden;
+    color: var(--main);
+}
+
+.btn{
+    text-decoration: none;
+    color: #000;
+}
+
+.container{
+    width: calc(var(--size) * var(--ratio));
+    margin: 0 auto;
+}
+
+.intro{
+    width: 100%;
+    text-align: center;
+    overflow: hidden;
+    font-size: 1rem;
+    text-transform: uppercase;
+    font-weight: bold;
+    color: var(--main-color);
+}
+
+.intro-title{
+    color: var(--main-color);
+    font-size: 5rem;
+    text-transform: uppercase;
+    font-weight: bold;
+    margin-top: 10vmin;
+}
+
+.intro-title p{
+    font-size: 10px;
+}

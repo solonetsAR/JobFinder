@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+     {% load static %}
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{% block title %} {% endblock %}</title>
+    <link href="https://cdn.jsdelivr.net/npm/remixicon@3.2.0/fonts/remixicon.css" rel="stylesheet">
+    <link rel="stylesheet" href="{% static 'base/css/styles.css' %}">
+    <link href="https://unpkg.com/boxicons@2.1.2/css/boxicons.min.css" rel="stylesheet">
+  {% block css_additional %} {% endblock %}
+</head>
+  <body>
+    <nav>
+      <div class="logo">
+        <i class="bx bx-menu menu-icon"></i>
+        <span class="logo-name"><i class="ri-search-eye-line"></i>FindJob</span>
+      </div>
+      <div class="sidebar">
+        <div class="logo">
+          <i class="bx bx-menu menu-icon"></i>
+          <span class="logo-name"><i class="ri-search-eye-line"></i>FindJob</span>
+        </div>
+
+        <div class="sidebar-content">
+          <ul class="lists">
+            {% if user.is_authenticated %}
+            <li class="list">
+              <a href="#" class="nav-link">
+                <i class='bx bxs-user-pin icon'></i>
+                <span class="link">Profile</span>
+              </a>
+            </li>
+            <li class="list">
+              <a href="#" class="nav-link">
+                <i class='bx bxs-briefcase-alt-2 icon' ></i>
+                <span class="link">Jobs</span>
+              </a>
+            </li>
+            <li class="list">
+              <a href="#" class="nav-link">
+                <i class='bx bxs-face icon' ></i>
+                <span class="link">Talents</span>
+              </a>
+            </li>
+            <li class="list">
+              <a href="#" class="nav-link">
+                <i class='bx bxs-school icon'></i>
+                <span class="link">Companies</span>
+              </a>
+            </li>
+            {% endif %}
+            <li class="list">
+              <a href="https://www.rezi.ai/" target="_blank" class="nav-link">
+                <i class='bx bx-code icon' ></i>
+                <span class="link">Ai Resume Builder</span>
+              </a>
+            </li>
+            <li class="list">
+              <a href="#" class="nav-link">
+                <i class='bx bxs-info-circle icon'></i>
+                <span class="link">About</span>
+              </a>
+            </li>
+          </ul>
+          {% if user.is_authenticated %}
+          <div class="bottom-cotent">
+            {% if user.profile or user.company %}
+            <li class="list">
+              <a href="{% url 'edit-profile' %}" class="nav-link">
+                <i class="bx bx-cog icon"></i>
+                <span class="link">Settings</span>
+              </a>
+            </li>
+            {% else %}
+            <li class="list">
+              <a href="{% url 'create-profile' %}" class="nav-link">
+                <i class="bx bx-cog icon"></i>
+                <span class="link">Settings</span>
+              </a>
+            </li>
+            {% endif %}
+            <li class="list">
+              <a href="{% url 'users-logout' %}" class="nav-link">
+                <i class="bx bx-log-out icon"></i>
+                <span class="link">Logout</span>
+              </a>
+            </li>
+          </div>
+          {% else %}
+          <div class="bottom-cotent">
+            <li class="list">
+              <a href="{% url 'users-signup' %}" class="nav-link">
+                <i class='bx bx-log-in icon' ></i>
+                <span class="link">Log In</span>
+              </a>
+            </li>
+          </div>
+          {% endif %}
+        </div>
+      </div>
+    </nav>
+
+    <section class="overlay"></section>
+
+    <main class="main">{% block content %} {% endblock %}</main>
+
+    <script>
+        const navBar = document.querySelector("nav"),
+       menuBtns = document.querySelectorAll(".menu-icon"),
+       overlay = document.querySelector(".overlay");
+     menuBtns.forEach((menuBtn) => {
+       menuBtn.addEventListener("click", () => {
+         navBar.classList.toggle("open");
+       });
+     });
+     overlay.addEventListener("click", () => {
+       navBar.classList.remove("open");
+     });
+    </script>
+  </body>
+</html>

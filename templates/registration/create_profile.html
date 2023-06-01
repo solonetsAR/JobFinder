@@ -1,0 +1,107 @@
+{% extends "base.html" %}
+
+{% block title %} Edit profile {% endblock %}
+
+{% load static %}
+
+{% block css_additional %}
+<link rel="stylesheet" type="text/css" href="{% static 'registration/edit_profile/css/styles.css' %}">
+{% endblock %}
+
+{% block content %}
+{% load countries %}
+{% get_countries as countries %}
+
+<div class="wrapper">
+        <div class="title">
+          Create Profile
+        </div>
+        <div class="form">
+        <form method="POST" action="{% url 'create-profile' %}" enctype="multipart/form-data">
+        {% csrf_token %}
+           <div class="inputfield">
+              <label>First Name*</label>
+              <input type="text" class="input" id="first_name" name="first_name">
+           </div>
+            <div class="inputfield">
+              <label>Last Name*</label>
+              <input type="text" class="input" id="last_name" name="last_name">
+           </div>
+          <div class="inputfield">
+              <label>Date of Birth*</label>
+              <input type="date" class="input" id="date_of_birth" name="date_of_birth">
+           </div>
+            <div class="inputfield">
+              <label>Country*</label>
+              <div class="custom_select">
+                <select name="country" >
+                  {% for country in countries %}
+                    <option value="{{ country.code }}" name="country">{{ country.name }}</option>
+                  {% endfor %}
+                </select>
+              </div>
+           </div>
+            <div class="inputfield">
+              <label>Skills*</label>
+              <div class="custom_select-skill" id="skill-select">
+                <select name="skills" id="skills" multiple>
+                  {% for skill in skills %}
+                    <option name="skills" value="{{ skill.id }}">{{ skill.name }}</option>
+                  {% endfor %}
+                </select>
+              </div>
+           </div>
+          <div class="inputfield">
+              <label>Description</label>
+              <textarea class="textarea" id="description" name="description"></textarea>
+           </div>
+          <div class="inputfield">
+              <label>GitHub</label>
+              <input type="text" class="input" name="github">
+           </div>
+            <div class="inputfield">
+              <label>Twitter</label>
+              <input type="text" class="input" name="twitter">
+           </div>
+            <div class="inputfield">
+              <label>linkedin</label>
+              <input type="text" class="input" name="linkedin">
+           </div>
+            <div class="inputfield">
+              <label>youtube</label>
+              <input type="text" class="input" name="youtube">
+           </div>
+            <div class="inputfield">
+                <div class="err">
+                  {% if profile_form.errors %}
+                        <div class="error-div">
+                            {{profile_form.errors}}
+                        </div>
+                    {% endif %}
+               </div>
+            </div>
+          <div class="inputfield">
+            <input type="submit" placeholder="Save" class="btn">
+          </div>
+        </form>
+</div>
+
+<script>
+const input = document.getElementById('input')
+
+input.addEventListener('change', (event) => {
+  const target = event.target
+  	if (target.files && target.files[0]) {
+      const maxAllowedSize = 2 * 1024 * 1024;
+      if (target.files[0].size > maxAllowedSize) {
+       	target.value = ''
+      }
+  }
+})
+</script>
+
+{% endblock content%}
+<!----><div class="inputfield">-->
+<!--              <label>Photo</label>-->
+<!--              <input type="file" id="input" class="input">-->
+<!--           </div>

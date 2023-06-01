@@ -1,0 +1,111 @@
+{% extends "base.html" %}
+
+{% block title %} Edit profile {% endblock %}
+
+{% load static %}
+
+{% block css_additional %}
+<link rel="stylesheet" type="text/css" href="{% static 'registration/edit_profile/css/styles.css' %}">
+{% endblock %}
+
+{% block content %}
+{% load countries %}
+{% get_countries as countries %}
+
+<div class="wrapper">
+        <div class="title">
+          Edit Profile
+        </div>
+        <div class="form">
+        <form method="POST" action="{% url 'edit-profile' %}" enctype="multipart/form-data">
+        {% csrf_token %}
+           <div class="inputfield">
+              <label>First Name*</label>
+              <input type="text" class="input" name="first_name" value="{{user.profile.first_name}}">
+           </div>
+            <div class="inputfield">
+              <label>Last Name*</label>
+              <input type="text" class="input" name="last_name" value="{{user.profile.last_name}}">
+           </div>
+            <div class="inputfield">
+              <label>Country*</label>
+              <div class="custom_select">
+                <select name="country">
+                  {% for country in countries %}
+                    {% if country.name == request.user.profile.country.name %}
+                        <option selected value="{{ country.code }}" name="country">{{ country.name }}</option>
+                    {% else %}
+                        <option value="{{ country.code }}" name="country">{{ country.name }}</option>
+                    {% endif %}
+                  {% endfor %}
+                </select>
+              </div>
+           </div>
+            <div class="inputfield">
+              <label>Skills*</label>
+              <div class="custom_select-skill" id="skill-select">
+                <select name="skills" id="skills" multiple>
+                  {% for skill in skills %}
+                    {% if skill.name in request.user.profile.get_skills %}
+                        <option selected name="skills" value="{{ skill.id }}">{{ skill.name }}</option>
+                    {% else %}
+                        <option name="skills" value="{{ skill.id }}">{{ skill.name }}</option>
+                    {% endif %}
+                  {% endfor %}
+                </select>
+              </div>
+           </div>
+          <div class="inputfield">
+              <label>Description</label>
+              <input type="text" class="textarea" name="description" value="{{user.profile.description}}">
+           </div>
+          <div class="inputfield">
+              <label>GitHub</label>
+              <input type="text" class="input" name="github" value="{{user.profile.github}}">
+           </div>
+            <div class="inputfield">
+              <label>Twitter</label>
+              <input type="text" class="input" name="twitter" value="{{user.profile.twitter}}">
+           </div>
+            <div class="inputfield">
+              <label>linkedin</label>
+              <input type="text" class="input" name="linkedin" value="{{user.profile.linkedin}}">
+           </div>
+            <div class="inputfield">
+              <label>youtube</label>
+              <input type="text" class="input" name="youtube" value="{{user.profile.youtube}}">
+           </div>
+            <div class="inputfield">
+                <div class="err">
+                  {% if profile_form.errors %}
+                        <div class="error-div">
+                            {{profile_form.errors}}
+                        </div>
+                    {% endif %}
+               </div>
+            </div>
+          <div class="inputfield">
+            <input type="submit" placeholder="Save" class="btn">
+          </div>
+        </form>
+</div>
+
+<script>
+const input = document.getElementById('input')
+
+input.addEventListener('change', (event) => {
+  const target = event.target
+  	if (target.files && target.files[0]) {
+      const maxAllowedSize = 2 * 1024 * 1024;
+      if (target.files[0].size > maxAllowedSize) {
+       	target.value = ''
+      }
+  }
+})
+</script>
+
+{% endblock content%}
+<!----><div class="inputfield">-->
+<!--              <label>Photo</label>-->
+<!--              <input type="file" id="input" class="input">-->
+<!--           </div>

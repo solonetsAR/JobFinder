@@ -1,0 +1,43 @@
+body{
+  text-align: center;
+  color: white;
+}
+
+#h1{
+    padding: 10px;
+}
+
+#h4{
+    padding: 20px;
+}
+
+.email-input{
+  font-family: "Poppins", sans-serif;
+  border: 2px solid white;
+  border-radius: 10px;
+  padding: 10px;
+  width: 15%;
+  background-color: #2e2e2e;
+  color: white;
+}
+
+.confirm-button{
+  font-family: "Poppins", sans-serif;
+  font-weight: 700;
+  border: 1px solid black;
+  border-radius: 20px;
+  padding: 10px;
+  width: 15%;
+  background-color: #1ed760;
+  color: white;
+  opacity: 1;
+}
+
+.confirm-button:hover {
+  cursor: pointer;
+  opacity: 0.6;
+  transition: 0.3s;
+}
+.forgot-pass-screen{
+    padding: 200px;
+}

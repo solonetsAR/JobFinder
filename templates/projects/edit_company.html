@@ -1,0 +1,77 @@
+{% extends "base.html" %}
+
+{% block title %} Edit company {% endblock %}
+
+{% load static %}
+
+{% block css_additional %}
+<link rel="stylesheet" type="text/css" href="{% static 'registration/edit_profile/css/styles.css' %}">
+{% endblock %}
+
+{% block content %}
+{% load countries %}
+{% get_countries as countries %}
+
+<div class="wrapper">
+    <form method="POST" action="{% url 'edit-company' %}">
+    {% csrf_token %}
+        <div class="title">
+          Edit Company
+        </div>
+        <div class="form">
+           <div class="inputfield">
+              <label>Company Name</label>
+              <input type="text" class="input" name="company_name" value="{{user.company.company_name}}">
+           </div>
+           <div class="inputfield">
+              <label>Image</label>
+              <input type="file" class="input" name="image">
+           </div>
+           <div class="inputfield">
+              <label>Email</label>
+              <input type="email" class="input" name="email_company" value="{{user.company.email_company}}">
+           </div>
+            <div class="inputfield">
+              <label>Website</label>
+              <input type="text" class="input" name="website" value="{{user.company.website}}">
+           </div>
+            <div class="inputfield">
+              <label>Country</label>
+                <div class="custom_select">
+                <select name="country">
+                  {% for country in countries %}
+                    {% if country.name == request.user.company.country.name %}
+                        <option selected value="{{ country.code }}" name="country">{{ country.name }}</option>
+                    {% else %}
+                        <option value="{{ country.code }}" name="country">{{ country.name }}</option>
+                    {% endif %}
+                  {% endfor %}
+                </select>
+                </div>
+           </div>
+          <div class="inputfield">
+              <label>Description</label>
+              <input class="textarea" name="description" value="{{user.company.description}}">
+          </div>
+          <div class="inputfield">
+            <input type="submit" value="Save" class="btn">
+          </div>
+        </div>
+    </form>
+</div>
+
+<script>
+const input = document.getElementById('input')
+
+input.addEventListener('change', (event) => {
+  const target = event.target
+  	if (target.files && target.files[0]) {
+      const maxAllowedSize = 2 * 1024 * 1024;
+      if (target.files[0].size > maxAllowedSize) {
+       	target.value = ''
+      }
+  }
+})
+</script>
+
+{% endblock content%}

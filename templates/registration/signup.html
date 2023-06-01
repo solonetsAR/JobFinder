@@ -1,0 +1,92 @@
+{% extends "base.html" %}
+
+{% block title %} FindJob {% endblock %}
+
+{% load static %}
+
+{% block css_additional %}
+<link rel="stylesheet" href="{% static 'registration/login/css/styles.css' %}">
+{% endblock %}
+
+{% block content %}
+<div class="container" id="container">
+	<div class="form-container sign-up-container">
+		<form method="POST">
+			{% csrf_token %}
+			<h1 class="sign_create">Create Account</h1>
+			<div class="social-container">
+				<a href="#" class="social" title="Register via Google"><i class='bx bxl-google' ></i></a>
+			</div>
+			<span>or use your email for registration</span>
+			<input type="email" id="email" placeholder="Email" name="email" required>
+
+			<input type="password" id="password1" placeholder="Password" name="password1" required>
+
+			<input type="password" id="password2" placeholder="Repeat your password" name="password2" required>
+
+			<select name="account_type">
+                	<option selected value="TA">Talent</option>
+					<option selected value="CO">Company</option>
+   	 		</select>
+
+			<button type="submit">Sign Up</button>
+			<div class="err">
+                {% if user_form.errors %}
+                    <div class="error-div">
+                        {{user_form.errors}}
+                    </div>
+                {% endif %}
+            </div>
+		</form>
+	</div>
+	<div class="form-container sign-in-container">
+		<form method="POST" action="/login/">
+			<h1 class="sign_create">Sign in</h1>
+			<div class="social-container">
+				<a href="#" class="social" title="log in via Google"><i class='bx bxl-google' ></i></a>
+			</div>
+			<span>or use your account</span>
+			{% csrf_token %}
+			<input type="email" name="email" placeholder="Email" >
+			<input type="password" name="password" placeholder="Password" >
+			<a href="{% url 'password_reset' %}">Forgot your password?</a>
+			<button type="submit">Sign In</button>
+			<div class="err-login">
+                {% if error %}
+                    <div class="error-login">
+                        {{error}}
+                    </div>
+                {% endif %}
+            </div>
+		</form>
+	</div>
+	<div class="overlay-container">
+		<div class="overlay-log">
+			<div class="overlay-panel overlay-left">
+				<h1>Welcome Back!</h1>
+				<p>To keep connected with us please login with your personal info</p>
+				<button class="ghost" id="signIn">Sign In</button>
+			</div>
+			<div class="overlay-panel overlay-right">
+				<h1>Hello, Friend!</h1>
+				<p>Enter your personal details and start journey with us</p>
+				<button class="ghost" id="signUp">Sign Up</button>
+			</div>
+		</div>
+	</div>
+</div>
+
+<script>
+    const signUpButton = document.getElementById('signUp');
+const signInButton = document.getElementById('signIn');
+const container = document.getElementById('container');
+
+signUpButton.addEventListener('click', () => {
+	container.classList.add("right-panel-active");
+});
+
+signInButton.addEventListener('click', () => {
+	container.classList.remove("right-panel-active");
+});
+</script>
+{% endblock %}
