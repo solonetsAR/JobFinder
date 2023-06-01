@@ -1,0 +1,11 @@
+body{
+  text-align: center;
+  color: white;
+}
+
+.reset-done{
+    font-family: "Poppins", sans-serif;
+    padding: 200px;
+    font-weight: 700;
+    font-size: 20px;
+}

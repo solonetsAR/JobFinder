@@ -1,3 +1,4 @@
+import os
 from pathlib import Path
 
 BASE_DIR = Path(__file__).resolve().parent.parent
@@ -19,7 +20,10 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
 
     'users.apps.UsersConfig',
-    'phonenumber_field'
+    'projects.apps.ProjectsConfig',
+    'phonenumber_field',
+    'django_countries',
+    'sass_processor',
 ]
 
 MIDDLEWARE = [
@@ -37,7 +41,7 @@ ROOT_URLCONF = 'findJob.urls'
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
-        'DIRS': [],
+        'DIRS': [os.path.join(BASE_DIR, 'templates')],
         'APP_DIRS': True,
         'OPTIONS': {
             'context_processors': [
@@ -50,8 +54,13 @@ TEMPLATES = [
     },
 ]
 
-WSGI_APPLICATION = 'findJob.wsgi.application'
+STATICFILES_FINDERS = [
+    'django.contrib.staticfiles.finders.FileSystemFinder',
+    'django.contrib.staticfiles.finders.AppDirectoriesFinder',
+    'sass_processor.finders.CssFinder',
+]
 
+WSGI_APPLICATION = 'findJob.wsgi.application'
 
 DATABASES = {
     'default': {
@@ -59,7 +68,6 @@ DATABASES = {
         'NAME': BASE_DIR / 'db.sqlite3',
     }
 }
-
 
 AUTH_PASSWORD_VALIDATORS = [
     {
@@ -76,7 +84,6 @@ AUTH_PASSWORD_VALIDATORS = [
     },
 ]
 
-
 LANGUAGE_CODE = 'en-us'
 
 TIME_ZONE = 'UTC'
@@ -85,8 +92,23 @@ USE_I18N = True
 
 USE_TZ = True
 
+ACCOUNT_EMAIL_REQUIRED = True
+ACCOUNT_USERNAME_REQUIRED = False
+ACCOUNT_AUTHENTICATION_METHOD = 'email'
 
+EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'
+EMAIL_PORT = 25
+LOGIN_REDIRECT_URL = 'home'
+LOGOUT_REDIRECT_URL = '/'
 STATIC_URL = 'static/'
-
+STATIC_ROOT = os.path.join(BASE_DIR, '/static/')
+MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
+MEDIA_URL = '/media/'
+SASS_PROCESSOR_ROOT = STATIC_ROOT
+PATH_TO_YOUR_STATIC_FOLDER = 'static'
+STATICFILES_DIRS = [
+    BASE_DIR / "static",
+    PATH_TO_YOUR_STATIC_FOLDER,
+]
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'

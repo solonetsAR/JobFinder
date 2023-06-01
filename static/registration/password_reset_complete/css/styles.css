@@ -1,0 +1,17 @@
+body{
+  text-align: center;
+  color: white;
+}
+
+.reset-done{
+    font-family: "Poppins", sans-serif;
+    padding: 250px;
+    font-weight: 700;
+    font-size: 20px;
+}
+
+.reset-done .log-a{
+    font-size: 30px;
+    color: var(--main-color);
+    text-decoration: none;
+}
