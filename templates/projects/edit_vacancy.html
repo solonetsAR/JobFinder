@@ -1,0 +1,107 @@
+{% extends "base.html" %}
+
+{% block title %} Edit company {% endblock %}
+
+{% load static %}
+
+{% block css_additional %}
+<link rel="stylesheet" type="text/css" href="{% static 'registration/edit_profile/css/styles.css' %}">
+{% endblock %}
+
+{% block content %}
+{% load countries %}
+{% get_countries as countries %}
+
+<div class="wrapper">
+    <form method="POST" >
+    {% csrf_token %}
+        <div class="title">
+          Edit Vacancy '{{vacancy.title}}'
+        </div>
+        <div class="form">
+           <div class="inputfield">
+              <label>Title</label>
+              <input type="text" class="input" name="title" value="{{vacancy.title}}" required>
+           </div>
+            <div class="inputfield">
+              <label>Description</label>
+              <input class="textarea" name="description" value="{{vacancy.description}}" required>
+          </div>
+            <div class="inputfield">
+              <label>Salary low</label>
+              <input type="text" class="input" name="salary_lower" value="{{vacancy.salary_lower}}" required>
+           </div>
+            <div class="inputfield">
+              <label>Salary top</label>
+              <input type="text" class="input" name="salary_upper">
+           </div>
+            <div class="inputfield">
+              <label>Country</label>
+                <div class="custom_select">
+                <select name="country" required>
+                  {% for country in countries %}
+                    {% if country.name == vacancy.country.name %}
+                        <option selected value="{{ country.code }}" name="country">{{ country.name }}</option>
+                    {% else %}
+                        <option value="{{ country.code }}" name="country">{{ country.name }}</option>
+                    {% endif %}
+                  {% endfor %}
+                </select>
+                </div>
+           </div>
+            <div class="inputfield">
+              <label>Skills*</label>
+              <div class="custom_select-skill" id="skill-select">
+                <select name="skills" id="skills" multiple>
+                  {% for skill in skills %}
+                    {% if skill in vacancy.skills.all %}
+                        <option selected name="skills" value="{{ skill.id }}">{{ skill.name }}</option>
+                    {% else %}
+                        <option name="skills" value="{{ skill.id }}">{{ skill.name }}</option>
+                    {% endif %}
+                  {% endfor %}
+                </select>
+              </div>
+           </div>
+            <div class="inputfield">
+               <label>Work Experience*</label>
+               <div class="remote-select">
+                    <select name="work_experience" required>
+                	    <option value="NO">No Experience Required</option>
+                        <option value="EN">Entry Level</option>
+                        <option value="MD">Mid Level</option>
+                        <option value="SN">Senior Level</option>
+   	 		        </select>
+               </div>
+            </div>
+            <div class="inputfield">
+               <label>Job Type*</label>
+               <div class="remote-select">
+                    <select name="job_type" required>
+                	    <option value="FT">Full-Time</option>
+                        <option value="PT">Part-Time</option>
+                        <option value="CT">Contract</option>
+                        <option value="TR">Temporary</option>
+                        <option value="IN">Internship</option>
+   	 		        </select>
+               </div>
+            </div>
+            <div class="inputfield">
+               <label>Remote*</label>
+               <div class="remote-select">
+                    <select name="remote">
+                	    <option selected value="Y">Yes</option>
+					    <option selected value="N">No</option>
+   	 		        </select>
+               </div>
+            </div>
+          <div class="inputfield">
+            <input type="submit" value="Save" class="btn">
+          </div>
+        </div>
+    </form>
+</div>
+
+
+
+{% endblock content%}

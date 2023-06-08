@@ -38,17 +38,6 @@ class CustomUserLoginForm(forms.ModelForm):
                 raise forms.ValidationError("invalid credential")
 
 
-class CreateProfileForm(forms.ModelForm):
-
-    class Meta:
-        model = Profile
-        fields = ['first_name', 'last_name', 'date_of_birth', 'country', 'skills', 'description', 'github', 'twitter',
-                  'linkedin', 'youtube']
-
-    def __init__(self, *args, **kwargs):
-        super(CreateProfileForm, self).__init__(*args, **kwargs)
-
-
 class EditProfileForm(forms.ModelForm):
 
     class Meta:

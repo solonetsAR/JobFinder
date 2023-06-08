@@ -26,25 +26,30 @@
           <ul class="lists">
             {% if user.is_authenticated %}
             <li class="list">
-              <a href="#" class="nav-link">
+              <a href="{% if user.company %}
+              {{ user.company.get_company_profile }}
+              {% else %}
+              {{ user.profile.get_talent_profile }}
+              {% endif %}
+              " class="nav-link">
                 <i class='bx bxs-user-pin icon'></i>
                 <span class="link">Profile</span>
               </a>
             </li>
             <li class="list">
-              <a href="#" class="nav-link">
+              <a href="{% url 'vacancies-page' %}" class="nav-link">
                 <i class='bx bxs-briefcase-alt-2 icon' ></i>
                 <span class="link">Jobs</span>
               </a>
             </li>
             <li class="list">
-              <a href="#" class="nav-link">
+              <a href="{% url 'talents-page' %}" class="nav-link">
                 <i class='bx bxs-face icon' ></i>
                 <span class="link">Talents</span>
               </a>
             </li>
             <li class="list">
-              <a href="#" class="nav-link">
+              <a href="{% url 'companies-page' %}" class="nav-link">
                 <i class='bx bxs-school icon'></i>
                 <span class="link">Companies</span>
               </a>
@@ -63,23 +68,28 @@
               </a>
             </li>
           </ul>
-          {% if user.is_authenticated %}
           <div class="bottom-cotent">
-            {% if user.profile or user.company %}
+            {% if user.company %}
             <li class="list">
-              <a href="{% url 'edit-profile' %}" class="nav-link">
-                <i class="bx bx-cog icon"></i>
-                <span class="link">Settings</span>
+              <a href="{% url 'vacancies-list' %}" class="nav-link">
+                <i class="ri-stack-fill icon"></i>
+                <span class="link">All Vacancies</span>
               </a>
             </li>
-            {% else %}
             <li class="list">
-              <a href="{% url 'create-profile' %}" class="nav-link">
-                <i class="bx bx-cog icon"></i>
-                <span class="link">Settings</span>
+              <a href="{% url 'vacancy-create' %}" class="nav-link">
+                <i class="ri-file-add-line icon"></i>
+                <span class="link">Create Vacancy</span>
               </a>
             </li>
             {% endif %}
+            {% if user.is_authenticated %}
+            <li class="list">
+              <a href="{% url 'edit-profile' %}" class="nav-link">
+                <i class="ri-edit-2-line icon"></i>
+                <span class="link">Edit Company</span>
+              </a>
+            </li>
             <li class="list">
               <a href="{% url 'users-logout' %}" class="nav-link">
                 <i class="bx bx-log-out icon"></i>
@@ -88,7 +98,6 @@
             </li>
           </div>
           {% else %}
-          <div class="bottom-cotent">
             <li class="list">
               <a href="{% url 'users-signup' %}" class="nav-link">
                 <i class='bx bx-log-in icon' ></i>

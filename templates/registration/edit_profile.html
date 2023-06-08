@@ -21,11 +21,17 @@
         {% csrf_token %}
            <div class="inputfield">
               <label>First Name*</label>
-              <input type="text" class="input" name="first_name" value="{{user.profile.first_name}}">
+              <input type="text" class="input" name="first_name" value="
+              {% if user.profile.first_name %}
+              {{user.profile.first_name}}
+              {% endif %}">
            </div>
             <div class="inputfield">
               <label>Last Name*</label>
-              <input type="text" class="input" name="last_name" value="{{user.profile.last_name}}">
+              <input type="text" class="input" name="last_name" value="
+              {% if user.profile.last_name %}
+              {{user.profile.last_name}}
+              {% endif %}">
            </div>
             <div class="inputfield">
               <label>Country*</label>
@@ -57,23 +63,38 @@
            </div>
           <div class="inputfield">
               <label>Description</label>
-              <input type="text" class="textarea" name="description" value="{{user.profile.description}}">
+              <input type="text" class="textarea" name="description" value="
+              {% if user.profile.description %}
+              {{user.profile.description}}
+              {% endif %}">
            </div>
           <div class="inputfield">
               <label>GitHub</label>
-              <input type="text" class="input" name="github" value="{{user.profile.github}}">
+              <input type="text" class="input" name="github" value="
+              {% if user.profile.github %}
+              {{user.profile.github}}
+              {% endif %}">
            </div>
             <div class="inputfield">
               <label>Twitter</label>
-              <input type="text" class="input" name="twitter" value="{{user.profile.twitter}}">
+              <input type="text" class="input" name="twitter" value="
+              {% if user.profile.twitter %}
+              {{user.profile.twitter}}
+              {% endif %}">
            </div>
             <div class="inputfield">
               <label>linkedin</label>
-              <input type="text" class="input" name="linkedin" value="{{user.profile.linkedin}}">
+              <input type="text" class="input" name="linkedin" value="
+              {% if user.profile.linkedin %}
+              {{user.profile.linkedin}}
+              {% endif %}">
            </div>
             <div class="inputfield">
               <label>youtube</label>
-              <input type="text" class="input" name="youtube" value="{{user.profile.youtube}}">
+              <input type="text" class="input" name="youtube" value="
+              {% if user.profile.youtube %}
+              {{user.profile.youtube}}
+              {% endif %}">
            </div>
             <div class="inputfield">
                 <div class="err">

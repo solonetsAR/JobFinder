@@ -122,9 +122,24 @@ body{
   border-radius: 3px;
 }
 
+.remote-select select{
+  -webkit-appearance: none;
+  -moz-appearance:   none;
+  appearance:        none;
+  outline: none;
+  width: 298px;
+  height: 100%;
+  border: 0px;
+  padding: 8px 10px;
+  font-size: 15px;
+  border: 1px solid #d5dbd9;
+  border-radius: 3px;
+}
+
 .wrapper .form .inputfield .input:focus,
 .wrapper .form .inputfield .textarea:focus,
 .wrapper .form .inputfield .custom_select select:focus,
+#remote-select,
 #skill-select select:focus{
   border: 1px solid #fec107;
 }

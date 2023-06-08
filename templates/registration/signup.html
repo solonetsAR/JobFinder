@@ -11,7 +11,7 @@
 {% block content %}
 <div class="container" id="container">
 	<div class="form-container sign-up-container">
-		<form method="POST">
+		<form method="POST" action="{% url 'users-signup' %}">
 			{% csrf_token %}
 			<h1 class="sign_create">Create Account</h1>
 			<div class="social-container">
