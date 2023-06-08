@@ -18,9 +18,9 @@
         <h2>{{vacancy.owner.company_name}}</h2>
         <h3>{{vacancy.title}}</h3>
         {% for skill in vacancy.skills.all %}
-        <p>{{ skill }}</p>
+        <p><a href="{% url 'vacancies-skills' skill.id %}">{{ skill }}</a></p>
         {% endfor %}
-        <a href="{{ vacancy.get_vacancy_profile }}">More info</a>
+        <a class="info" href="{{ vacancy.get_vacancy_profile }}">More info</a>
       </div>
     </div>
   </div>

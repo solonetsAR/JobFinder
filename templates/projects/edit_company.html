@@ -21,28 +21,15 @@
         <div class="form">
            <div class="inputfield">
               <label>Company Name</label>
-              <input type="text" class="input" name="company_name" value="
-              {% if user.company.company_name %}
-              {{user.company.company_name}}
-              {% endif %}">
-           </div>
-           <div class="inputfield">
-              <label>Image</label>
-              <input type="file" class="input" name="image">
+              <input type="text" class="input" name="company_name" value="{{user.company.company_name}}">
            </div>
            <div class="inputfield">
               <label>Email</label>
-              <input type="email" class="input" name="email_company" value="
-              {% if user.company.email_company %}
-              {{user.company.email_company}}
-              {% endif %}">
+              <input type="email" class="input" name="email_company" value="{{user.company.email_company}}">
            </div>
             <div class="inputfield">
               <label>Website</label>
-              <input type="text" class="input" name="website" value="
-              {% if user.company.website %}
-              {{user.company.website}}
-              {% endif %}">
+              <input type="text" class="input" name="website" value="{{user.company.website}}">
            </div>
             <div class="inputfield">
               <label>Country</label>
@@ -60,10 +47,7 @@
            </div>
           <div class="inputfield">
               <label>Description</label>
-              <input class="textarea" name="description"  value="
-              {% if user.company.description %}
-              {{user.company.description}}
-              {% endif %}">
+              <input class="textarea" name="description"  value="{{user.company.description}}">
           </div>
           <div class="inputfield">
             <input type="submit" value="Save" class="btn">

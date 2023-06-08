@@ -12,7 +12,7 @@
 <div class="container">
 {% for profile in profiles %}
 <div class="card-container">
-	<h3>{{profile.first_name}}  {{profile.last_name}}</h3>
+	<h3>{{profile.first_name|capfirst}}  {{profile.last_name|capfirst}}</h3>
 	<h6>{{profile.country.name}}</h6>
 	<p>
 		{% if profile.github %}
@@ -40,7 +40,8 @@
 		<h6>Skills:</h6>
 		<ul>
 			{% for skill in profile.skills.all %}
-			<li>{{ skill }}</li>
+			<li><a style="text-decoration: none; color: white;" href="{% url 'talents-skills' skill.id %}">{{ skill }}
+			</a></li>
 			{% endfor %}
 		</ul>
 	</div>

@@ -15,9 +15,9 @@
     <div class="box">
       <div class="content">
         <h2>{{ company.country.name }}</h2>
-        <h3>{{company.company_name}}</h3>
-        <p><a id="website" target="_blank" href="{{ company.website }}">Website</a></p>
-        <a href="{{ company.get_company_profile }}">Read More</a>
+        <h3>{{company.company_name|capfirst}}</h3>
+        <p><a class="info" id="website" target="_blank" href="{{ company.website }}">Website</a></p>
+        <a class="info" href="{{ company.get_company_profile }}">Read More</a>
       </div>
     </div>
   </div>

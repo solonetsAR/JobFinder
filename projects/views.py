@@ -1,6 +1,6 @@
 from django.contrib.auth.decorators import login_required
 from django.http import HttpResponseRedirect
-from django.shortcuts import render, redirect
+from django.shortcuts import render, redirect, get_object_or_404
 from django.utils.decorators import method_decorator
 from django.views import View
 from django.views.generic import TemplateView
@@ -91,6 +91,17 @@ class TalentsView(TemplateView):
             'profiles': profiles
         }
         return render(request, self.template_name, context)
+
+
+def talent_by_skill(request, id):
+    skill = get_object_or_404(Skill, id=id)
+    profiles = Profile.objects.filter(skills__in=[skill]).all()
+    print(profiles)
+    context = {
+        "profiles": profiles
+    }
+
+    return render(request, "projects/talents_page.html", context)
 
 
 class VacancyProfileView(TemplateView):
@@ -208,3 +219,15 @@ class VacancyView(TemplateView):
                     'vacancy_form': vacancy_form,
                 }
                 return render(request, self.template_name, context)
+
+
+def vacancy_by_skill(request, id):
+    skill = get_object_or_404(Skill, id=id)
+    print(skill)
+    vacancies = Vacancy.objects.filter(skills__in=[skill]).all()
+    print(vacancies)
+    context = {
+        "vacancies": vacancies
+    }
+
+    return render(request, "projects/vacancies_page.html", context)
