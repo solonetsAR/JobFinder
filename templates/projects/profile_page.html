@@ -1,0 +1,51 @@
+{% extends "base.html" %}
+
+{% block title %} Profile {% endblock %}
+
+{% load static %}
+
+{% block css_additional %}
+<link rel="stylesheet" type="text/css" href="{% static 'projects/profiles_page/css/styles.css' %}">
+{% endblock %}
+
+{% block content %}
+<body>
+    <div class="container">
+        <div class="box">
+            <ul>
+                <li>{{ company.company_name|capfirst }}</li>
+                <li>
+
+            </ul>
+        </div>
+        <div class="About">
+            <ul>
+                <h1>about</h1>
+            </ul>
+            {% if profile.e %}
+            <ul>
+                <a id="website" href="{{company.website}}"><h3>Website</h3></a>
+            </ul>
+            {% endif %}
+            {% if profile.country %}
+            <ul>
+                <h3>Country</h3>
+                <li>{{profile.country.name}}</li>
+            </ul>
+            {% endif %}
+            {% if company.description %}
+            <ul>
+                <h3>About Us</h3>
+                <p>{{company.description}}</p>
+            </ul>
+            {% endif %}
+            {% if company.email_company %}
+            <ul>
+                <h3>Contact</h3>
+                <li>{{company.email_company}}</li>
+            </ul>
+            {% endif %}
+        </div>
+    </div>
+</body>
+{% endblock %}

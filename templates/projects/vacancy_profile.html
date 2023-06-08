@@ -1,0 +1,86 @@
+{% extends "base.html" %}
+
+{% block title %} Vacancy {{vacancy.title}} {% endblock %}
+
+{% load static %}
+
+{% block css_additional %}
+<link rel="stylesheet" type="text/css" href="{% static 'projects/profiles_page/css/styles.css' %}">
+{% endblock %}
+
+{% block content %}
+<body>
+    <div class="container">
+        <div class="box">
+            <ul>
+                <li>{{ vacancy.title|capfirst }}</li>
+            </ul>
+        </div>
+        <div class="About">
+            <ul>
+                <h1>about</h1>
+            </ul>
+            <ul>
+                <h3>Company</h3>
+                <li>{{company.company_name}}</li>
+            </ul>
+            {% if vacancy.country %}
+            <ul>
+                <h3>Country</h3>
+                <li>{{vacancy.country.name}}</li>
+            </ul>
+            {% endif %}
+            {% if vacancy.description %}
+            <ul>
+                <h3>About Vacancy</h3>
+                <p>{{vacancy.description}}</p>
+            </ul>
+            {% endif %}
+            {% if vacancy.skills %}
+            <ul>
+                <h3>Skills:</h3>
+                {% for skill in vacancy.skills.all %}
+                <li>{{skill}}</li>
+                {% endfor %}
+            </ul>
+            {% endif %}
+            {% if vacancy.salary_lower %}
+            <ul>
+                <h3>Salary low</h3>
+                <li>${{vacancy.salary_lower}}</li>
+            </ul>
+            {% endif %}
+            {% if vacancy.salary_upper %}
+            <ul>
+                <h3>Salary top</h3>
+                <li>${{vacancy.salary_upper}}</li>
+            </ul>
+            {% endif %}
+            {% if vacancy.work_experience %}
+            <ul>
+                <h3>Work Experience</h3>
+                <li>{{vacancy.work_experience}}</li>
+            </ul>
+            {% endif %}
+            {% if vacancy.job_type %}
+            <ul>
+                <h3>Job Type</h3>
+                <li>{{vacancy.job_type}}</li>
+            </ul>
+            {% endif %}
+            {% if vacancy.remote %}
+            <ul>
+                <h3>remote</h3>
+                <li>{{vacancy.remote}}</li>
+            </ul>
+            {% endif %}
+            {% if company.email_company %}
+            <ul>
+                <h3>Contact</h3>
+                <li>{{company.email_company}}</li>
+            </ul>
+            {% endif %}
+        </div>
+    </div>
+</body>
+{% endblock %}

@@ -1,0 +1,50 @@
+{% extends "base.html" %}
+
+{% block title %} Talents {% endblock %}
+
+{% load static %}
+
+{% block css_additional %}
+<link rel="stylesheet" href="{% static 'projects/talents_page/css/styles.css' %}">
+{% endblock %}
+
+{% block content %}
+<div class="container">
+{% for profile in profiles %}
+<div class="card-container">
+	<h3>{{profile.first_name}}  {{profile.last_name}}</h3>
+	<h6>{{profile.country.name}}</h6>
+	<p>
+		{% if profile.github %}
+		<a class="icons" target="_blank" href="{{profile.github}}"><i class="ri-github-line"></i></a>
+		{% endif %}
+		{% if profile.twitter %}
+		<a class="icons" target="_blank" href="{{profile.twitter}}"><i class="ri-twitter-line icon"></i></a>
+		{% endif %}
+		{% if profile.linkedin %}
+		<a class="icons" target="_blank" href="{{profile.linkedin}}"><i class="ri-linkedin-box-line icon"></i></a>
+		{% endif %}
+		{% if profile.youtube %}
+		<a target="_blank" class="icons" href="{{profile.youtube}}"><i class="ri-youtube-line"></i></a>
+		{% endif %}</p>
+		<textarea cols="70" disabled rows="5">{{profile.description}}</textarea>
+	<div class="buttons">
+		<button class="primary">
+			<a href="{% url 'development' %}">Message</a>
+		</button>
+		<button class="primary">
+			<a href="{{ profile.get_talent_profile }}">Profile</a>
+		</button>
+	</div>
+	<div class="skills">
+		<h6>Skills:</h6>
+		<ul>
+			{% for skill in profile.skills.all %}
+			<li>{{ skill }}</li>
+			{% endfor %}
+		</ul>
+	</div>
+</div>
+</div>
+{% endfor %}
+{% endblock content %}

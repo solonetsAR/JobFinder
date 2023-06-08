@@ -1,0 +1,36 @@
+{% extends "base.html" %}
+
+{% block title %} Vacancies {% endblock %}
+
+{% load static %}
+
+{% block css_additional %}
+<link rel="stylesheet" type="text/css" href="{% static 'projects/vacancies_page/css/styles.css' %}">
+{% endblock %}
+
+{% block content %}
+<div class="container">
+  {% for vacancy in vacancies %}
+  {% for vacancy in vacancies %}
+  <div class="card">
+    <div class="box">
+      <div class="content">
+        <h2>{{vacancy.owner.company_name}}</h2>
+        <h3>{{vacancy.title}}</h3>
+        {% for skill in vacancy.skills.all %}
+        <p>{{ skill }}</p>
+        {% endfor %}
+        <a href="{{ vacancy.get_vacancy_url }}" >Edit</a>
+        <form action="{% url 'vacancy-delete' %}" method="post">
+          {% csrf_token %}
+          <button type="submit" id="delete-button">Delete</button>
+          <input type="hidden" name="vacancy_id" value="{{ vacancy.id }}">
+        </form>
+<!--        <a class="delete-button" href="{{ vacancy.get_vacancy_url }}" >Delete</a>-->
+      </div>
+    </div>
+  </div>
+  {% endfor %}
+  {% endfor %}
+</div>
+{% endblock content%}

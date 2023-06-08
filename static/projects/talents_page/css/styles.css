@@ -1,0 +1,107 @@
+* {
+	box-sizing: border-box;
+}
+
+body {
+	display: flex;
+	align-items: center;
+	justify-content: center;
+
+	min-height: 100vh;
+	margin: 0;
+}
+
+a{
+    text-decoration:none;
+}
+
+h3 {
+	margin: 10px 0;
+}
+
+h6 {
+	margin: 5px 0;
+	text-transform: uppercase;
+	margin-bottom: 10px;
+}
+
+textarea {
+    margin-top: 10px;
+    background-color: #1c1c1c;
+    resize: none;
+    border: none;
+    outline: none;
+    color: var(--text-color);
+}
+
+p {
+	font-size: 14px;
+	line-height: 21px;
+}
+
+.container {
+    margin-top: 100px;
+}
+
+.card-container {
+    margin-top: 30px;
+    margin-bottom: 40px;
+	background-color: #1c1c1c;
+	border-radius: 5px;
+	box-shadow: 0px 10px 20px -10px rgba(0,0,0,1);
+	color: var(--text-color);
+	padding-top: 30px;
+	width: 550px;
+	text-align: center;
+}
+
+.card-container .round {
+	border: 1px solid #03BFCB;
+	border-radius: 50%;
+	padding: 7px;
+}
+
+.icons{
+    font-size: 25px;
+    color: var(--main-color);
+    margin-left: 5px;
+    margin-right: 5px;
+}
+
+button.primary {
+	background-color: var(--main-color);
+	border: 1px solid var(--main-color);
+	border-radius: 3px;
+	color: #231E39;
+	font-weight: 500;
+	margin-top: 10px;
+	padding: 10px 25px;
+	width: 130px;
+}
+
+button.primary.ghost {
+	background-color: transparent;
+	color: #02899C;
+}
+
+.skills {
+	background-color: #212121;
+	text-align: left;
+	padding: 15px;
+	margin-top: 30px;
+}
+
+.skills ul {
+	list-style-type: none;
+	margin: 0;
+	padding: 0;
+}
+
+.skills ul li {
+	border: 1px solid #2D2747;
+	border-radius: 2px;
+	display: inline-block;
+	font-size: 12px;
+	margin: 0 7px 7px 0;
+	padding: 7px;
+}

@@ -1,3 +1,4 @@
+from django.urls import reverse
 from phonenumber_field.modelfields import PhoneNumberField
 from django.contrib.auth.models import AbstractBaseUser, PermissionsMixin
 from django.db import models
@@ -39,12 +40,14 @@ class Skill(models.Model):
     def __str__(self):
         return str(self.name)
 
+    class Meta:
+        ordering = ['name']
+
 
 class Profile(models.Model):
     user = models.OneToOneField(User, on_delete=models.CASCADE, blank=True, null=True)
     first_name = models.CharField(_('first name'), max_length=100, blank=True, null=True)
     last_name = models.CharField(_('last name'), max_length=100, blank=True, null=True)
-    date_of_birth = models.DateField(blank=True, null=True)
     country = CountryField(blank=True, null=True)
     skills = models.ManyToManyField(Skill, blank=True)
     description = models.TextField(max_length=1000, blank=True, null=True)
@@ -60,8 +63,8 @@ class Profile(models.Model):
     class Meta:
         ordering = ['created']
 
-    def save(self, *args, **kwargs):
-        super().save(*args, **kwargs)
-
     def get_skills(self):
-        return ", ".join([skills.name for skills in self.skills.all()])
+        return ", ".join([skills for skills in self.skills.all()])
+
+    def get_talent_profile(self):
+        return reverse("talent-profile", args=[self.id])
